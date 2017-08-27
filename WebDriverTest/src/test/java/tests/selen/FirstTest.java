@@ -20,7 +20,7 @@ public class FirstTest {
         driver = new ChromeDriver();
     }
 
-    @Test // Marking this method as part of the test
+    @Test 
     public void gotoSeleniumWikiPage() {
         // Go to the Wikipedia home page
         driver.get("https://en.wikipedia.org/");
