@@ -16,6 +16,9 @@ public class LogInAsNonAdmin {
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
+  //Creds
+  private String mail;
+  private String pass;
 
   @BeforeClass(alwaysRun = true)
   public void setUp() throws Exception {
@@ -30,11 +33,11 @@ public class LogInAsNonAdmin {
   public void testLogInAsNonAdmin() throws Exception {
       driver.get(baseUrl + "/site/login");
       //String loginMail = "test.andersen.test@gmail.com";
-      String loginMail = "testLogin@mail.com";
+
       driver.findElement(By.id("loginform-email")).clear();
-      driver.findElement(By.id("loginform-email")).sendKeys(loginMail);
+      driver.findElement(By.id("loginform-email")).sendKeys(mail);
       driver.findElement(By.id("loginform-password")).clear();
-      driver.findElement(By.id("loginform-password")).sendKeys("Aa123456");
+      driver.findElement(By.id("loginform-password")).sendKeys(pass);
       driver.findElement(By.cssSelector("ins.iCheck-helper")).click();
       try {
         assertTrue(isElementPresent(By.cssSelector("ins.iCheck-helper")));

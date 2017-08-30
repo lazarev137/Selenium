@@ -16,6 +16,9 @@ public class CheckSettingsHomeTab {
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
+  //Creds
+  private String mail;
+  private String pass;
 
   @BeforeClass(alwaysRun = true)
   public void setUp() throws Exception {
@@ -23,15 +26,17 @@ public class CheckSettingsHomeTab {
     driver = new ChromeDriver();
     baseUrl = "http://77.40.214.21/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    mail = "test.andersen.test@gmail.com";
+    pass = "Aa123456";
   }
 
   @Test
   public void testCheckSettingsHomeTab() throws Exception {
     driver.get(baseUrl + "/site/login");
     driver.findElement(By.id("loginform-email")).clear();
-    driver.findElement(By.id("loginform-email")).sendKeys("test.andersen.test@gmail.com");
+    driver.findElement(By.id("loginform-email")).sendKeys(mail);
     driver.findElement(By.id("loginform-password")).clear();
-    driver.findElement(By.id("loginform-password")).sendKeys("Aa123456");
+    driver.findElement(By.id("loginform-password")).sendKeys(pass);
     driver.findElement(By.id("sign_button")).click();
     driver.findElement(By.xpath("(//a[contains(@href, '#')])[3]")).click();
     try {
@@ -60,7 +65,7 @@ public class CheckSettingsHomeTab {
       verificationErrors.append(e.toString());
     }
     driver.findElement(By.cssSelector("i.fa.fa-gears")).click();
-    driver.findElement(By.linkText("rightbar1@test.test")).click();
+    driver.findElement(By.linkText(mail)).click();
     driver.findElement(By.linkText("Sign Out")).click();
     try {
       assertTrue(isElementPresent(By.cssSelector("div.login-box-body")));
